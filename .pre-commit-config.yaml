@@ -40,8 +40,8 @@ repos:
             --option,
             "indent_string=    ",
           ]
-  - repo: https://github.com/JohnnyMorganz/StyLua
+  - repo: https://github.com/johnnymorganz/stylua
     rev: v2.0.2
     hooks:
-      - id: stylua
+      - id: stylua-github
         name: stylua
