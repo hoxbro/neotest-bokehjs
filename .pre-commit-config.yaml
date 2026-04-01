@@ -10,7 +10,7 @@ repos:
       - id: check-json
       - id: detect-private-key
   - repo: https://github.com/codespell-project/codespell
-    rev: 63c8f8312b7559622c0d82815639671ae42132ac # frozen: v2.4.1
+    rev: 2ccb47ff45ad361a21071a7eedda4c37e6ae8c5a # frozen: v2.4.2
     hooks:
       - id: codespell
         args: ["--write-changes"]
@@ -21,7 +21,7 @@ repos:
         args: ["--exclude=SC1091,SC2181"]
         exclude: (zshrc|zsh)$
   - repo: https://github.com/hoxbro/prettier-pre-commit
-    rev: bae77de89db2ee6b2052f9647b14246e9ee19cd1 # frozen: v3.7.4
+    rev: 86ff8f664c20f581d71c90a6ea0073c1bcafe1e5 # frozen: v3.8.1
     hooks:
       - id: prettier
         types_or:
@@ -41,7 +41,7 @@ repos:
             "indent_string=    ",
           ]
   - repo: https://github.com/johnnymorganz/stylua
-    rev: 3701d2cb65198ec748d3a593628625be9f91fe27 # frozen: v2.3.1
+    rev: 28e1d7b5db3f2c6c53580963c79c5e6a5b374ca0 # frozen: v2.4.0
     hooks:
       - id: stylua-github
         name: stylua
