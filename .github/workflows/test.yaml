@@ -43,7 +43,7 @@ jobs:
         run: pixi run -e ${{ matrix.environment }} install
       - name: Test
         shell: bash -e {0}
-        run: pixi run -e ${{ matrix.environment }} test --output=TAP
+        run: pixi run -e ${{ matrix.environment }} test
       - if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v5
         with:

@@ -14,7 +14,6 @@ update-all = { depends-on = [
 ] }
 
 [dependencies]
-luarocks = "*"
 nodejs = "*"
 tree-sitter-cli = "*"
 
