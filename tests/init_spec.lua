@@ -1,4 +1,5 @@
 local async = require("nio.tests")
+local path = require("plenary.path")
 local plugin = require("neotest-bokehjs")
 
 local root_dir = vim.uv.cwd() .. "/tests/data/bokehjs/"
@@ -38,49 +39,46 @@ end)
 
 describe("discover_positions", function()
     async.it("discover_positions in test_file.ts", function()
-        local positions = plugin.discover_positions("tests/data/test_file.ts"):to_list()
-
-        local expected_name = "test_file.ts"
-        if vim.fn.has("win32") == 1 then expected_name = "tests/data/test_file.ts" end
-
+        local file_path = path:new(vim.uv.cwd(), "tests", "data", "test_file.ts").filename
+        local positions = plugin.discover_positions(file_path):to_list()
         local expected_positions = {
             {
-                id = "tests/data/test_file.ts",
-                name = expected_name,
-                path = "tests/data/test_file.ts",
+                id = file_path,
+                name = "test_file.ts",
+                path = file_path,
                 range = { 0, 0, 42, 0 },
                 type = "file",
             },
             {
                 {
-                    id = "tests/data/test_file.ts::describe",
+                    id = file_path .. "::describe",
                     name = "describe",
-                    path = "tests/data/test_file.ts",
+                    path = file_path,
                     range = { 31, 21, 41, 1 },
                     type = "namespace",
                 },
                 {
                     {
-                        id = "tests/data/test_file.ts::describe::it-1",
+                        id = file_path .. "::describe::it-1",
                         name = "it-1",
-                        path = "tests/data/test_file.ts",
+                        path = file_path,
                         range = { 32, 13, 34, 3 },
                         type = "test",
                     },
                 },
                 {
                     {
-                        id = "tests/data/test_file.ts::describe::sub-describe",
+                        id = file_path .. "::describe::sub-describe",
                         name = "sub-describe",
-                        path = "tests/data/test_file.ts",
+                        path = file_path,
                         range = { 36, 27, 40, 3 },
                         type = "namespace",
                     },
                     {
                         {
-                            id = "tests/data/test_file.ts::describe::sub-describe::it-2",
+                            id = file_path .. "::describe::sub-describe::it-2",
                             name = "it-2",
-                            path = "tests/data/test_file.ts",
+                            path = file_path,
                             range = { 37, 15, 39, 5 },
                             type = "test",
                         },
