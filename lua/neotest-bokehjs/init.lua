@@ -1,10 +1,11 @@
-local Path = require("plenary.path")
 local lib = require("neotest.lib")
 
 local test_types = { "integration", "unit", "defaults" }
 
+local split_path = function(path) return vim.split(vim.fs.normalize(path), "/", { plain = true, trimempty = true }) end
+
 local get_test_type = function(path)
-    local paths = (type(path) == "string" and vim.split(path, Path.path.sep)) or path
+    local paths = (type(path) == "string" and split_path(path)) or path
     local matches = vim.tbl_filter(function(val) return vim.tbl_contains(paths, val) end, test_types)
     return matches[1]
 end
@@ -30,7 +31,7 @@ end
 ---@param root string Root directory of project
 ---@return boolean
 function adapter.filter_dir(name, rel_path, root)
-    local paths = vim.split(rel_path, Path.path.sep)
+    local paths = split_path(rel_path)
     return paths[1] == "test" and (paths[2] == nil or vim.tbl_contains(test_types, paths[2]))
 end
 
@@ -38,7 +39,7 @@ end
 ---@param file_path string
 ---@return boolean
 function adapter.is_test_file(file_path)
-    local paths = vim.split(file_path, Path.path.sep)
+    local paths = split_path(file_path)
     return get_test_type(paths) ~= nil
         and vim.endswith(file_path, ".ts")
         and not vim.endswith(file_path, ".d.ts")
