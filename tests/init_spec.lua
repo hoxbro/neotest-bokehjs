@@ -39,10 +39,14 @@ end)
 describe("discover_positions", function()
     async.it("discover_positions in test_file.ts", function()
         local positions = plugin.discover_positions("tests/data/test_file.ts"):to_list()
+
+        local expected_name = "test_file.ts"
+        if vim.fn.has("win32") == 1 then expected_name = "tests/data/test_file.ts" end
+
         local expected_positions = {
             {
                 id = "tests/data/test_file.ts",
-                name = "test_file.ts",
+                name = expected_name,
                 path = "tests/data/test_file.ts",
                 range = { 0, 0, 42, 0 },
                 type = "file",
